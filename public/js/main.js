@@ -1,0 +1,1 @@
+console.log("Hello world from app developed using ES6 modules and express.js");

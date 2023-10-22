@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+  main.container 
+    h1= title 
+    div.text-right
+      a.back-button(href='/') Back to home
+    form(method='POST', action='/add') 
+      label(for='name') Title: 
+      input(type='text', id='title', name='title', required) 
+      label(for='description') Decription: 
+      input(type='text', id='description', name='description', required) 
+      button(type='submit') Submit
