@@ -164,3 +164,13 @@ button[type="submit"]:hover {
 .text-right {
   text-align: right;
 }
+
+.description {
+  margin-left: 1.5rem;
+  font-style: italic;
+}
+
+.uncomplete {
+  text-decoration: line-through;
+  color: #333;
+}

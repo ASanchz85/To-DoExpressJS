@@ -40,9 +40,24 @@ const addTask = (req, res) => {
   res.redirect("/");
 };
 
-const getEditTaskFrom = (req, res) => {};
+const getEditTaskFrom = (req, res) => {
+  let id = parseInt(req.params.id);
+  let task = tasks.find((task) => task.id === id);
 
-const editTask = (req, res) => {};
+  if (!task) res.redirect("/");
+
+  res.render("edit", { title: "Edit Task", task });
+};
+
+const editTask = (req, res) => {
+  let id = parseInt(req.params.id);
+  let taskIndex = tasks.findIndex((task) => task.id === id);
+
+  if (taskIndex === -1) res.redirect("/");
+
+  tasks[taskIndex] = { id: taskIndex + 1, ...req.body };
+  res.redirect("/");
+};
 
 const completeTask = (req, res) => {};
 

@@ -12,10 +12,12 @@ block content
       else
         each task in tasks
           li(class=task.completed ? 'completed' : '')
-            a(href=`/edit/${task.id}`) #{task.title}
+            div
+              a(href=`/edit/${task.id}`) #{task.title}
             div
               if task.completed
                 a.uncomplete-button(href=`/uncomplete/${task.id}`) Mark as uncomplete
               else
                 a.complete-button(href=`/complete/${task.id}`) Mark as complete
               a.delete-button(href=`/delete/${task.id}`) Delete
+          p(class=task.completed ? 'description uncomplete' : 'description')= task.description

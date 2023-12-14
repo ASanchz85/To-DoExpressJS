@@ -2,12 +2,12 @@ extends layout
 
 block content 
   main.container 
-    h1= title 
+    h1.text-center= title 
     div.text-right
-      a.back-button(href='/') Back to home
+      a.back-button(href='/') Back to ⏎ 🏠
     form(method='POST', action='/add') 
       label(for='name') Title: 
       input(type='text', id='title', name='title', required) 
-      label(for='description') Decription: 
+      label(for='description') Description: 
       input(type='text', id='description', name='description', required) 
       button(type='submit') Submit
