@@ -1,23 +1,5 @@
-let tasks = [
-  {
-    id: 1,
-    title: "Learn Node.js",
-    completed: false,
-    description: "Learn Node.js and become a master of it",
-  },
-  {
-    id: 2,
-    title: "Learn React.js",
-    completed: true,
-    description: "Learn React.js and become a master of it",
-  },
-  {
-    id: 3,
-    title: "Learn Angular.js",
-    completed: false,
-    description: "Learn Angular.js and become a master of it",
-  },
-];
+import { checkId } from "../utils/checkers.js";
+import { tasks } from "../utils/constants.js";
 
 const getAllTasks = (req, res) => {
   res.render("index", { title: "To-Do App with Espress.js", tasks });
@@ -41,8 +23,7 @@ const addTask = (req, res) => {
 };
 
 const getEditTaskFrom = (req, res) => {
-  let id = parseInt(req.params.id);
-  let task = tasks.find((task) => task.id === id);
+  const task = checkId(req.params.id, tasks).taskFounded;
 
   if (!task) res.redirect("/");
 
@@ -50,20 +31,36 @@ const getEditTaskFrom = (req, res) => {
 };
 
 const editTask = (req, res) => {
-  let id = parseInt(req.params.id);
-  let taskIndex = tasks.findIndex((task) => task.id === id);
+  let taskIndex = checkId(req.params.id, tasks).taskIndex;
 
-  if (taskIndex === -1) res.redirect("/");
+  if (taskIndex !== -1) tasks[taskIndex] = { id: taskIndex + 1, ...req.body };
 
-  tasks[taskIndex] = { id: taskIndex + 1, ...req.body };
   res.redirect("/");
 };
 
-const completeTask = (req, res) => {};
+const completeTask = (req, res) => {
+  let taskIndex = checkId(req.params.id, tasks).taskIndex;
 
-const uncompletedTask = (req, res) => {};
+  if (taskIndex !== -1) tasks[taskIndex].completed = true;
 
-const deleteTask = (req, res) => {};
+  res.redirect("/");
+};
+
+const uncompletedTask = (req, res) => {
+  let taskIndex = checkId(req.params.id, tasks).taskIndex;
+
+  if (taskIndex !== -1) tasks[taskIndex].completed = false;
+
+  res.redirect("/");
+};
+
+const deleteTask = (req, res) => {
+  let taskIndex = checkId(req.params.id, tasks).taskIndex;
+
+  if (taskIndex !== -1) tasks.splice(taskIndex, 1);
+
+  res.redirect("/");
+};
 
 export default {
   getAllTasks,
