@@ -5,10 +5,12 @@ import helmet from "helmet";
 import morgan from "morgan";
 import errorController from "./controllers/errorController.js";
 import route from "./routes/main.routes.js";
+import apiRoute from "./routes/api.routes.js";
 
 //?? conservamos la variable dirname como estandar proviniente del common.js de node.js.
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const app = express();
+const url = "http://localhost";
 const port = 3000;
 
 //settings
@@ -25,10 +27,11 @@ app.set("view engine", "pug");
 
 //routes
 app.use("/", route);
+app.use("/api", apiRoute);
 
 app.use(errorController.error404);
 
 //initialization
 app.listen(port, () => {
-  console.log(`MVC project app listening at http://localhost:${port}`);
+  console.log(`MVC project app listening at ${url}:${port}`);
 });

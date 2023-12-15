@@ -1,7 +1,7 @@
 export const checkId = (paramsIdToCheck, arrayContainer) => {
-  let id = parseInt(paramsIdToCheck);
-  let taskFounded = arrayContainer.find((task) => task.id === id);
-  let taskIndex = arrayContainer.findIndex((task) => task.id === id);
+  let taskFounded = arrayContainer.find((task) => task.id === paramsIdToCheck);
+  let taskFiltered = arrayContainer.filter((task) => task.id !== paramsIdToCheck);
+  let taskIndex = arrayContainer.findIndex((task) => task.id === paramsIdToCheck);
 
-  return { taskFounded, taskIndex };
+  return { taskFounded, taskFiltered, taskIndex };
 };
