@@ -1,5 +1,6 @@
 import { checkId } from "../utils/checkers.js";
 import { tasks } from "../utils/constants.js";
+import { uuidGen } from "../utils/uuid.js";
 
 const getAllTasks = (req, res) => {
   res.render("index", { title: "To-Do App with Espress.js", tasks });
@@ -11,7 +12,7 @@ const getAddTaskFrom = (req, res) => {
 
 const addTask = (req, res) => {
   const { title, description } = req.body;
-  const id = tasks.length + 1;
+  const id = uuidGen();
   const newTask = {
     id,
     title,
