@@ -1,7 +1,8 @@
-import { checkId } from "../utils/checkers.js";
+import { checkId, checkSchema } from "../utils/checkers.js";
 import { tasks } from "../utils/constants.js";
 import { messages } from "../utils/jsonMessages.js";
 import {uuidGen} from "../utils/uuid.js";
+import { schema } from "../models/schema.js";
 
 const getAllTasks = (req, res) => {
   res.status(200).json(messages(200, tasks));
@@ -18,6 +19,10 @@ const getOneTask = (req, res) => {
 }
 
 const addTask = (req, res) => {
+  const checkings = checkSchema(req.body, schema);  
+  if (checkings) {
+    return res.status(400).json(messages(400, checkings));
+  }
   const { title, description } = req.body;
   const id = uuidGen();
   const newTask = {

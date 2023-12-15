@@ -1,3 +1,5 @@
+import { schema } from "../models/schema.js";
+
 export const messages = (status, options) => {
   switch (status) {
     case 200:
@@ -24,7 +26,13 @@ export const messages = (status, options) => {
     case 204:
       return { status: "204", error: false, message: "No Content" };
     case 400:
-      return { status: "400", error: true, message: "Bad Request" };
+      return {
+        status: "400",
+        error: true,
+        message: "Bad Request",
+        errors: options,
+        sugggestedSchema: schema,
+      };
     case 401:
       return { status: "401", error: true, message: "Unauthorized" };
     case 403:
