@@ -3,44 +3,44 @@ export const messages = (status, options) => {
     case 200:
       return {
         status: "200",
-        success: true,
+        error: false,
         message: "OK",
         tasks: options,
       };
     case 201:
       return {
         status: "201",
-        success: true,
+        error: false,
         message: "Created",
         task: options,
       };
     case 202:
       return {
         status: "202",
-        success: true,
+        error: false,
         message: "Accepted",
         tasks: options,
       };
     case 204:
-      return { status: "204", success: true, message: "No Content" };
+      return { status: "204", error: false, message: "No Content" };
     case 400:
-      return { status: "400", success: false, message: "Bad Request" };
+      return { status: "400", error: true, message: "Bad Request" };
     case 401:
-      return { status: "401", success: false, message: "Unauthorized" };
+      return { status: "401", error: true, message: "Unauthorized" };
     case 403:
-      return { status: "403", success: false, message: "Forbidden" };
+      return { status: "403", error: true, message: "Forbidden" };
     case 404:
-      return { status: "404", success: false, message: "Not Found" };
+      return { status: "404", error: true, message: "Not Found" };
     case 500:
       return {
         status: "500",
-        success: false,
+        error: true,
         message: "Internal Server Error",
       };
     default:
       return {
         status: "500",
-        success: false,
+        error: true,
         message: "Internal Server Error",
       };
   }

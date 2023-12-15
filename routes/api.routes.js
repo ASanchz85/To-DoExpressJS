@@ -4,6 +4,7 @@ import apiController from "../controllers/apiController.js";
 const apiRoute = Router();
 
 apiRoute.get("/", apiController.getAllTasks);
+apiRoute.get("/:id", apiController.getOneTask);
 apiRoute.post("/", apiController.addTask);
 apiRoute.put("/:id", apiController.editTask);
 apiRoute.put("/complete/:id", apiController.completeTask);

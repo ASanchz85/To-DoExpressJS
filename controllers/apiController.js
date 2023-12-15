@@ -7,6 +7,16 @@ const getAllTasks = (req, res) => {
   res.status(200).json(messages(200, tasks));
 };
 
+const getOneTask = (req, res) => {
+  let taskFounded = checkId(req.params.id, tasks).taskFounded;
+
+  if (taskFounded) {
+    res.status(200).json(messages(200, taskFounded));
+  } else {
+    res.status(404).json(messages(404));
+  }
+}
+
 const addTask = (req, res) => {
   const { title, description } = req.body;
   const id = uuidGen();
@@ -66,6 +76,7 @@ const deleteTask = (req, res) => {
 
 export default {
   getAllTasks,
+  getOneTask,
   addTask,
   editTask,
   completeTask,
